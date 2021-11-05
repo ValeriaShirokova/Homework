@@ -1,3 +1,5 @@
+x = 0
+
 #  1. Создать переменную int_item со значением 10
 int_item = 10
 #  2. Создать переменную comp_item со значением 18
@@ -83,33 +85,37 @@ currency_convertor = item_2
 #                     31.5 Сделать elif в котором будет условие: если target_currency равен ‘uah’, то в теле этого if в значении переменной currency_result высчитать сколько долларов получится при target_currency_amount и usd_uah_rate. Результат вывести в консоль (target_currency_amount, uah_item, “=”, currency_result, uah_item)
 #                     31.6 Сделать elif с остальными валютами
 #                     31.7 Последним оставить else, при выполнений которого в консоль выведется (“Unknow currency”)
-while currency_convertor:
+if currency_convertor:
     currency_usd = usd_item
     currency_result = 0
     currencies = [eur_item, uah_item, chf_item, rub_item, byn_item]
-    for target_currency in currencies:
+    target_currency = input("Choose your currency: eur, uah, chf, rub or byn: ")
+    while target_currency not in currencies:
+        print('Unknown currency')
+        target_currency = input("Choose your currency: eur, uah, chf, rub or byn: ")
+    target_currency_amount = None
+    while not target_currency_amount:
         try:
             target_currency_amount = float(input("Enter the amount of money: "))
         except ValueError:
-            print("Please enter only digits")
-            break
-        target_currency = input("Choose your currency: eur, uah, chf, rub or byn: ")
-        if target_currency == "eur":
-            currency_result = round(target_currency_amount / usd_eur_rate, 2)
-            print(target_currency_amount, eur_item, "=", currency_result, usd_item)
-        elif target_currency == "uah":
-            currency_result = round(target_currency_amount / usd_uah_rate, 2)
-            print(target_currency_amount, uah_item, "=", currency_result, usd_item)
-        elif target_currency == "chf":
-            currency_result = round(target_currency_amount / usd_chf_rate, 2)
-            print(target_currency_amount, chf_item, "=", currency_result, usd_item)
-        elif target_currency == "rub":
-            currency_result = round(target_currency_amount / usd_rub_rate, 2)
-            print(target_currency_amount, rub_item, "=", currency_result, usd_item)
-        elif target_currency == "byn":
-            currency_result = round(target_currency_amount / usd_byn_rate, 2)
-            print(target_currency_amount, byn_item, "=", currency_result, usd_item)
-        else:
-            print("Unknown currency")
+            print("Please enter only digits; use periods in decimals")
+            pass
+    if target_currency == "eur":
+        currency_result = round(target_currency_amount / usd_eur_rate, 2)
+        print(target_currency_amount, eur_item, "=", currency_result, usd_item)
+    elif target_currency == "uah":
+        currency_result = round(target_currency_amount / usd_uah_rate, 2)
+        print(target_currency_amount, uah_item, "=", currency_result, usd_item)
+    elif target_currency == "chf":
+        currency_result = round(target_currency_amount / usd_chf_rate, 2)
+        print(target_currency_amount, chf_item, "=", currency_result, usd_item)
+    elif target_currency == "rub":
+        currency_result = round(target_currency_amount / usd_rub_rate, 2)
+        print(target_currency_amount, rub_item, "=", currency_result, usd_item)
+    elif target_currency == "byn":
+        currency_result = round(target_currency_amount / usd_byn_rate, 2)
+        print(target_currency_amount, byn_item, "=", currency_result, usd_item)
+    else:
+        print("Unknown currency")
 else:
     print("Переменная currency_convertor = ", item_3)
