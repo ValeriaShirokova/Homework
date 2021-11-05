@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 
 { "lesson": "Git",
   "Group": 24
+}
+=======
+{  "lesson": "Git",
+   "Group": 24
+>>>>>>> Apple_Pay
 }
