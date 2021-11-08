@@ -1,1 +1,1 @@
-ID  Test description  Expected result  Pass/Fail   Bug report ID 
+ID  Test description  Expected result  Pass/Fail  Comments  Bug report ID
