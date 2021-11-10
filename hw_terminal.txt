@@ -1,0 +1,39 @@
+1) Посмотреть где я - pwd
+2) Создать папку - mkdir folder_1
+3) Зайти в папку - cd folder_1
+4) Создать 3 папки - mkdir f_2 f_3 f_4
+5) Зайти в любоую папку - cd f_3
+6) Создать 5 файлов (3 txt, 2 json) - touch 1.txt 2.txt 3.txt 4.json 5.json
+7) Создать 3 папки - mkdir f_5 f_6 f_7
+8. Вывести список содержимого папки - ls -la
+9) + Открыть любой txt файл - vim 1.txt
+10) + написать туда что-нибудь, любой текст - i Homework text
+11) + сохранить и выйти - Esc + : wq
+12) Выйти из папки на уровень выше - cd ..
+—
+13) переместить любые 2 файла, которые вы создали, в любую другую папку - mv ~/lesson_1_terminal/folder_1/f_3/*.json ~/lesson_1_terminal/folder_1/f_2
+14) скопировать любые 2 файла, которые вы создали, в любую другую папку - cp ~/lesson_1_terminal/folder_1/f_3/1.txt ~/lesson_1_terminal/folder_1/f_3/2.txt ~/lesson_1_terminal/folder_1/f_4
+15) Найти файл по имени - find ~/lesson_1_terminal/ -name 1.txt
+16) просмотреть содержимое в реальном времени (команда grep) изучите как она работает - tail -f ~/lesson_1_terminal/folder_1/f_4/1.txt
+17) вывести несколько первых строк из текстового файла - head ~/lesson_1_terminal/folder_1/f_4/1.txt
+18) вывести несколько последних строк из текстового файла - tail ~/lesson_1_terminal/folder_1/f_4/1.txt
+19) просмотреть содержимое длинного файла (команда less) изучите как она работает - less text.txt
+20) вывести дату и время - date
+=========
+
+Задание *
+1) Отправить http запрос на сервер.
+http://162.55.220.72:5005/object_info_3?name=Vadim&age=32&salary=1000 - curl "http://162.55.220.72:5005/object_info_3?name=Vadim&age=32&salary=1000"
+
+2) Написать скрипт который выполнит автоматически пункты 3, 4, 5, 6, 7, 8, 13 - 1. Создать файл myscript с расширением .sh и следующим содержимым: 
+#!/bin/bash 
+cd folder_1
+mkdir f_8 f_9 f_10
+cd f_8
+touch a.txt b.txt c.txt 6.json 7.json
+mkdir f_11 f_12 f_13
+ls -la
+mv ~/lesson_1_terminal/folder_1/f_8/*.json ~/lesson_1_terminal/folder_1/f_10 
+
+2. Запустить скрипт с помощью команды ./myscript.sh
+
