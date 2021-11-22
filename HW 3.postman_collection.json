@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "122a4320-4a46-4d29-bd51-928264f2dff4",
+		"_postman_id": "c01a5395-0fc2-4dbf-805f-7c9e601ec1d4",
 		"name": "HW 3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -403,17 +403,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"// 1) Можете взять любой объект из присланного списка, используйте js random.\r",
-							"//В объекте возьмите Cur_ID и передать через окружение в следующий запрос.\r",
-							"var jsonData = pm.response.json();\r",
-							"var length = jsonData.length;\r",
-							"var rand = Math.floor(Math.random() * length);\r",
-							"var object = jsonData[rand];\r",
-							"var rand_id = object.Cur_ID;\r",
-							"if (rand_id > 400) {\r",
-							"    pm.environment.set(\"Cur_ID\", rand_id);\r",
-							"};\r",
-							"\r",
 							"// // ***\r",
 							"// // 1) получить список валют\r",
 							"// // 2) итерировать список валют\r",
@@ -437,11 +426,11 @@
 							"for (var i = 0; i < length; i++) {\r",
 							"    cur_arr.push(jsonData[i].Cur_ID)\r",
 							"};\r",
-							"\r",
 							"var cur_length = cur_arr.length;\r",
+							"var valid_curr = [];\r",
 							"for (var y = 0; y < cur_length; y++) {\r",
 							"    \r",
-							"    pm.sendRequest({\r",
+							"    var postRequest = {\r",
 							"        url: 'http://162.55.220.72:5005/curr_byn',\r",
 							"        method: 'POST',\r",
 							"        header: {'Content-Type': 'application/json',\r",
@@ -453,22 +442,23 @@
 							"                {key: \"curr_code\", value: cur_arr[y]} \r",
 							"            ]\r",
 							"                \r",
-							"        }\r",
-							"    \r",
-							"    }, function (err, res) {\r",
-							"        \r",
-							"        try {\r",
-							"           if (res.json().Cur_OfficialRate) {\r",
-							"            console.log(res.json());\r",
 							"            } \r",
-							"        }\r",
-							"        catch (error) {\r",
-							"            console.log(\"Sorry, no data available\")\r",
-							"        }\r",
+							"        };\r",
+							"        \r",
+							"    pm.sendRequest(postRequest, function (error, response) {\r",
+							"            try {\r",
+							"                if (response.json().Cur_OfficialRate)\r",
+							"                    console.log(response.json())\r",
+							"                    valid_curr.push(response.json().Cur_ID)\r",
+							"                }\r",
+							"            catch (error) {\r",
+							"                console.log(\"Sorry, no data available\")\r",
+							"                }\r",
 							"            \r",
-							"        }\r",
-							"    );\r",
-							"}"
+							"        pm.environment.set(\"valid_currency_arr\", valid_curr);\r",
+							"    });\r",
+							"    \r",
+							"};"
 						],
 						"type": "text/javascript"
 					}
@@ -526,6 +516,21 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
 							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// 1) Можете взять любой объект из присланного списка, используйте js random.\r",
+							"//В объекте возьмите Cur_ID и передать через окружение в следующий запрос.\r",
+							"var array = pm.environment.get(\"valid_currency_arr\");\r",
+							"var arr_length = array.length;\r",
+							"var rand = Math.floor(Math.random() * arr_length);\r",
+							"pm.environment.set(\"Cur_ID\", array[rand]);\r",
+							""
 						],
 						"type": "text/javascript"
 					}
