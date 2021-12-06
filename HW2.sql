@@ -297,6 +297,44 @@ values (2, 10),
        (49, 1),
        (65, 11),
        (68, 12);
-      
+ 
+select role_name, monthly_salary from roles_employee 
+join roles on roles.id = roles_employee.role_id
+join employee_salary on roles_employee.employee_id = employee_salary.employee_id
+join salary on employee_salary.salary_id = salary.id;
 
-	 
+create table city(
+	id serial primary key,
+	city_name varchar(40) unique not null
+);
+
+create table person(
+	id serial primary key,
+	person_name varchar(40),
+	city_id int not null
+)
+	
+ 
+insert into city(city_name)
+values ('Kiyv'),
+	   ('Minsk'),
+	   ('Moscow'),
+	   ('Krakov'),
+	   ('Lviv'),
+	   ('Berlin');
+	  
+insert into person(person_name, city_id)
+values	('Vadim', 5),
+        ('Stanislav', 6),
+        ('Vasiliy', 2),
+        ('Andrey', 3),
+        ('Anastasiya', 3),
+        ('Evgeniya', 7),
+        ('Victor', 10);
+       
+       
+select person_name, city_name from city
+left join person on city.id = person.city_id;
+
+select * from employee_salary;
+
